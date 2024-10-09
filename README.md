@@ -1,8 +1,13 @@
 # Terraform Examples for Azure
 
-![Terraform](https://img.shields.io/badge/Terraform-Enabled-blueviolet)
-![Azure](https://img.shields.io/badge/Azure-Supported-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
+![Terraform](https://img.shields.io/badge/Terraform-Examples-blueviolet)
+![Terraform Version](https://img.shields.io/badge/Terraform-v1.9.7-blueviolet)
+![Azure](https://img.shields.io/badge/Azure-IaC-blue)
+
+![Status](https://img.shields.io/badge/Status-Active%20Development-orange)
+![License](https://img.shields.io/badge/License-MIT-yellowgreen)
+![Contributions](https://img.shields.io/badge/Contributions-Welcome-brightgreen)
+
 
 ## Overview
 
