@@ -38,56 +38,47 @@ By leveraging **Infrastructure as Code (IaC)** with Terraform, these examples en
 
 ## Getting Started
 
-1. **Clone the Repository**: Copy the repository to your local machine:
+1. **Install Git**: If you haven’t already, [install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) on your machine by following the instructions for your operating system.
+   
+2. **Configure Git**: Set up your Git identity by configuring your username and email:
+
+   ```bash
+   git config --global user.name "Your Name"
+   git config --global user.email "your.email@example.com"
+   ```
+   
+3. **Clone the Repository**: Once Git is installed and identity configured, clone the repository to your local machine:
 
    ```bash
    git clone https://github.com/eliaquimbrandao/terraform-azure.git
    ```
 
-2. **Install Terraform**: If you haven't already, [install Terraform](https://learn.hashicorp.com/terraform/getting-started/install.html) on your machine.
+4. **Install Terraform**: If you haven't already, [install Terraform](https://learn.hashicorp.com/terraform/getting-started/install.html) on your machine.
 
-3. **Authenticate with Azure**:
+5. **Authenticate with Azure**:
 
-   - Log in using Azure CLI:
+   - Log in using [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login):
 
      ```bash
      az login
      ```
 
-   - Or set up a Service Principal:
+   - Or set up a [Service Principal](https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac):
 
      ```bash
      az ad sp create-for-rbac --name "terraform-sp" --role="Contributor" --scopes="/subscriptions/<subscription-id>"
      ```
 
-4. **Initialize Terraform**: Navigate to the desired example directory and run:
-
-   ```bash
-   terraform init
-   ```
-
-5. **Review and Apply Configuration**:
-
-   - Preview the changes:
-
-     ```bash
-     terraform plan
-     ```
-
-   - Apply the configuration:
-
-     ```bash
-     terraform apply
-     ```
+4. **Explore and Experiment**: Now that you’re all set up, and ready to dive into the Terraform code. Enjoy exploring and building! 🎉
 
 ## Examples
 
 Each example resides in its own directory with specific instructions:
 
-- **Virtual Machine Deployment**: [examples/virtual-machine](examples/virtual-machine)
-- **Azure Kubernetes Service (AKS)**: [examples/aks](examples/aks)
-- **Storage Account Setup**: [examples/storage-account](examples/storage-account)
-- **Networking**: [examples/networking](examples/networking)
+- **Networking**: [terraform-azure/networking](terraform-azure/networking) ⏳ Pending  
+- **Virtual Machine**: [terraform-azure/virtual-machine](terraform-azure/virtual-machine) ⏳ Pending  
+- **Storage Sync Services (Azure File Sync)**: [terraform-azure/storage-sync](https://github.com/eliaquimbrandao/terraform-azure/tree/main/storage-sync) ✅ Completed
+- **Storage Account**: [terraform-azure/storage-account](terraform-azure/storage-account) ⏳ Pending  
 
 *(More examples as they become available.)*
 
