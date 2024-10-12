@@ -1,11 +1,10 @@
-# variables.tf
 
 variable "location" {
   description = "The Azure region where resources will be created."
   type        = string
 }
 
-variable "resource_group_name" {
+variable "rg_name" {
   description = "The name of the resource group."
   type        = string
 }
@@ -56,4 +55,22 @@ variable "server_local_path" {
   type        = string
 }
 
+variable "initial_download_policy" {
+  description = "The initial download policy for the server endpoint."
+  type        = string
+}
 
+variable "cloud_tiering_enabled" {
+  description = "Whether to enable cloud tiering for the server endpoint."
+  type        = bool
+}
+
+variable "volume_free_space_percent" {
+  description = "The percentage of free space to maintain on the volume."
+  type        = number
+}
+
+variable "tier_files_older_than_days" {
+  description = "The number of days after which files should be tiered."
+  type        = number
+}
