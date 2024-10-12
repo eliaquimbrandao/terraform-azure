@@ -14,6 +14,16 @@ variable "storage_account_name" {
   type        = string
 }
 
+variable "account_tier" {
+  description = "The performance tier of the storage account. Options: Standard, Premium."
+  type        = string
+}
+
+variable "account_replication_type" {
+  description = "The replication type of the storage account. Options: LRS, GRS, RAGRS, ZRS."
+  type        = string
+}
+
 variable "file_share_name" {
   description = "The name of the Azure File Share."
   type        = string

@@ -1,4 +1,3 @@
-
 resource "azurerm_storage_sync_server_endpoint" "serverendpoint" {
   name                       = var.server_endpoint_name
   storage_sync_group_id      = var.storage_sync_group_id

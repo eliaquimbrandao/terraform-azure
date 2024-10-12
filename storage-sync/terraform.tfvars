@@ -1,6 +1,8 @@
 location                    = #"<Azure region for resource deployment, e.g., 'East US'>"
 rg_name                     = #"<Name of the resource group to create or use, e.g., 'rg-example'>"
 storage_account_name        = #"<Name of the Azure Storage Account, e.g., 'examplestorageacct'>"
+account_tier              = # or "Premium"
+account_replication_type  =       # or "GRS", "RAGRS", "ZRS"
 file_share_name             = #"<Name of the Azure File Share, e.g., 'example-fileshare'>"
 file_share_quota            = #"<Quota in GB for the Azure File Share, e.g., 102400>"
 storage_sync_name           = #"<Name of the Azure File Sync service, e.g., 'example-sync'>"

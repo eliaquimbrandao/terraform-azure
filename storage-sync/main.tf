@@ -5,12 +5,14 @@ module "rg" {
 }
 
 module "storage" {
-  source               = "./module-storage"
-  rg_name              = module.rg.resource_group_name
-  location             = var.location
-  storage_account_name = var.storage_account_name
-  file_share_name      = var.file_share_name
-  file_share_quota     = var.file_share_quota
+  source                   = "./module-storage"
+  rg_name                  = module.rg.resource_group_name
+  location                 = var.location
+  storage_account_name     = var.storage_account_name
+  account_tier             = var.account_tier
+  account_replication_type = var.account_replication_type
+  file_share_name          = var.file_share_name
+  file_share_quota         = var.file_share_quota
 }
 
 module "syncservice" {

@@ -1,5 +1,3 @@
-# storage_sync.tf
-
 resource "azurerm_storage_sync" "afssync" {
   name                = var.storage_sync_name
   resource_group_name = var.rg_name
