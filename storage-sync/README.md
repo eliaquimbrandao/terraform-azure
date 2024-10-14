@@ -108,5 +108,12 @@ graph TD
 
     TF --- AZ
 ```
-## Steps
+## Consideration
+
+The creation of a Storage Sync Service involves two primary components for functionality: the cloud endpoint and the server endpoint. For this project, we will structure the deployment into two parts:
+
+  - Part 1: Creation of the basic resources, including storage, file share, and Storage Sync Service, as well as the configuration of the cloud endpoint.
+  - Part 2: Installation of the agent, server registration, and configuration of the server endpoint.
+
+## How to
 
