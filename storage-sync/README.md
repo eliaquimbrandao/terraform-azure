@@ -12,15 +12,17 @@
 ## Overview
 This project automates the deployment of an Azure Storage Sync environment using Terraform. It consists of modularized components for resource group creation, storage account and storage sync services and its components.
 
+## Access Prerequisites
+
+**Azure Service Principal or Azure Account Credentials:** with `Contributor` and `Storage Account Contributor` and for a more restrictive access level, was created a custom role for `Azure File Sync Administrator`.
+
+**StorageSync Service:** Ensure the `Microsoft.StorageSync` application has `Reader and Data Access` permissions at the subscription level or Storage Account level.
+
+## 
 > [!IMPORTANT]
 >
 > When creating Azure File Sync cloud endpoints, remember that lower-level mechanisms like ARM templates or SDKs are used. Therefore, configuring the necessary permissions is the author’s responsibility:
-> 
-> For this use case, the following were utilized:
->
-> **Terraform SPN:** `Contributor` and `Storage Account Contributor` and for a more restrictive access level, was created a custom role for `Azure File Sync Administrator`.
->
-> **StorageSync Service:** Ensure the `Microsoft.StorageSync` application has `Reader and Data Access` permissions at the subscription level or Storage Account level.
+
 
 > [!NOTE]
 >  Microsoft public article request the credential identity to have `Owner` permission. [Create cloud endpoint](https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-deployment-guide?tabs=azure-portal%2Cproactive-portal#create-a-sync-group-and-a-cloud-endpoint).
@@ -79,28 +81,9 @@ storage-sync/
 
 ## Diagram
 
-```mermaid
-graph TD
-    subgraph TF["Terraform Workflow"]
-        1((az login)) --> 2([terraform init])
-        2 --> 3([terraform plan])
-        3 --> 4([terraform apply])
-    end
-    style TF fill:#623CE4,stroke:#333,stroke-width:1px,color:#ffffff
+<img width="920" alt="image" src="https://github.com/user-attachments/assets/0574cff2-7900-4efd-bd35-e82855f42ea2">
 
-    subgraph AZ["Azure Infrastructure"]
-        A{{Resource Group}} --> B((Storage Account))
-        B --> F[/File Share/]
-        A --> C{{Storage Sync Service}}
-        C --> D[(Cloud Endpoint)]
-        C --> E[(Server Endpoint)]
-        F --> D
-    end
-    style AZ fill:#007FFF,stroke:#333,stroke-width:1px,color:#ffffff
-
-    TF --- AZ
-```
-## 📝 Consideration of Project Structure
+## 📝 Project Structure
 
 For this project, we will structure it into two parts:
 
@@ -120,7 +103,7 @@ For this project, we will structure it into two parts:
 > The project is structured this way because we will need to manually intervene to install the agent on the server where the file server we want to synchronize is located. After this correct instalation and server registration, we will obtain the value for the `registered_server_id` variable, which will allow us to proceed with applying the `module-server-endpoint`.
 
 > [!IMPORTANT]
-> The project is structured as described here today, but it may undergo changes in the future to adopt a more automated approach.
+> The project is structured as described, but it may undergo changes in the future to adopt a more automated approach.
 
 ## How to
 
