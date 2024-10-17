@@ -12,23 +12,37 @@
 ## Overview
 This project automates the deployment of an Azure Storage Sync environment using Terraform. It consists of modularized components for resource group creation, storage account and storage sync services and its components.
 
-## Access Prerequisites
+## Prerequisites
 
-**Azure Service Principal or Azure Account Credentials:** with `Contributor` and `Storage Account Contributor` and for a more restrictive access level, was created a custom role for `Azure File Sync Administrator`.
+> [!NOTE]
+>  To create a cloud endpoint for Azure File Sync, the Microsoft documentation specifies that the credential identity must have the `Owner` permission. [Create cloud endpoint](https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-deployment-guide?tabs=azure-portal%2Cproactive-portal#create-a-sync-group-and-a-cloud-endpoint).
+> 
+> *"The administrator creating the cloud endpoint must be a member of the management role `Owner` for the storage account that contains the Azure file share the cloud endpoint is pointing to"*.
+> 
+> Creating a cloud endpoint involves lower-level operations that go beyond standard data access permissions. These operations often involve configurations and permissions associated with the Azure Resource Manager (ARM) templates or SDKs. As a result, it is the responsibility of the user to ensure the necessary permissions are in place.
 
-**StorageSync Service:** Ensure the `Microsoft.StorageSync` application has `Reader and Data Access` permissions at the subscription level or Storage Account level.
+
+### Access 
+As mentioned before [terraform-azure](terraform-azure/README.md), after you have setup your environment and configured **Service Principal** credentials, ensure that it has the appropriate permissions for provisioning the required resources.
+
+  -  **Azure Service Principal:** `Contributor` access at subscription level. Consider a custom RBAC (Role-Based Access Control) for more restrictive access level if required.
+
+  -  **StorageSync Service:** Ensure the `Microsoft.StorageSync` application has `Reader and Data Access` permissions at the Storage Account level or subscription level to enable required low-level operations. [terraform-note](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_sync_cloud_endpoint)
+   
+ 
+```bash
+appId=$(az ad sp list --display-name "Microsoft.StorageSync" --query "[0].appId" -o tsv)
+
+az role assignment create --assignee $appId --role "Reader and Data Access" --scope "/subscriptions/your-subscription-id"
+```
 
 ## 
 > [!IMPORTANT]
->
-> When creating Azure File Sync cloud endpoints, remember that lower-level mechanisms like ARM templates or SDKs are used. Therefore, configuring the necessary permissions is the author’s responsibility:
-
-
-> [!NOTE]
->  Microsoft public article request the credential identity to have `Owner` permission. [Create cloud endpoint](https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-deployment-guide?tabs=azure-portal%2Cproactive-portal#create-a-sync-group-and-a-cloud-endpoint).
+> When using the `Owner` permission via the Azure portal, access to the `Microsoft.StorageSync` application is configured automatically to the Storage account, providing a smoother experience. However, using lower level mechanisms, even with `Owner` does not currently yield the same results. An issue is open to address this discrepancy.
 > 
-> *"The administrator creating the cloud endpoint must be a member of the management role Owner for the storage account that contains the Azure file share the cloud endpoint is pointing to"*
-
+> [issue #9531](https://github.com/Azure/azure-powershell/issues/9531)
+> 
+> [issue #28614](https://github.com/Azure/azure-cli/issues/28614)
 
 ## Project Structure
 
