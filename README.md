@@ -17,7 +17,7 @@ By leveraging **Infrastructure as Code (IaC)** with Terraform, these examples en
 ## Table of Contents
 
 - [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
+- [Getting Started - Prerequisites](#getting-started---prerequisites)
 - [Examples](#examples)
 - [Collaboration & Contribution](#collaboration--contribution)
 - [Goals](#goals)
@@ -35,7 +35,7 @@ By leveraging **Infrastructure as Code (IaC)** with Terraform, these examples en
   - **[Service Principals](https://learn.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals)**: Secure identities for authenticating with Azure.
   - **[Managed Identities](https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview)**: Authenticate without managing credentials.
 
-## Getting Started
+## Getting Started - Prerequisites
 
 1. **Install Git**: If you haven’t already, [install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) on your machine by following the instructions for your operating system.
 
@@ -56,13 +56,14 @@ By leveraging **Infrastructure as Code (IaC)** with Terraform, these examples en
 
 5. **Authenticate with Azure**:
 
-   - Log in using [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login):
+Choose from the following authentication methods that aligns with your environment and security requirements:
 
-     ```bash
-     az login
-     ```
+- **Managed Identity**: Best for Azure-hosted Terraform runs (e.g., VMs, AKS).
+- **Service Principal**: Ideal for external or automated runs. Requires setup of client ID, secret, and permissions.
+- **Azure Account Credentials**: For development and manual tasks. Use `az login` to authenticate. Not recommended for automation.
 
-   - Or set up a [Service Principal](https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac):
+For this scenario, we recommend using a **Service Principal** for authentication.
+   -  If you don’t have one set up yet, you can create a **Service Principal** by following these steps. [Service Principal](https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac):
 
      ```bash
      az ad sp create-for-rbac --name "terraform-sp" --role="Contributor" --scopes="/subscriptions/<subscription-id>"
