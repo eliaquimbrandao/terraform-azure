@@ -44,6 +44,14 @@ az role assignment create --assignee $appId --role "Reader and Data Access" --sc
 > 
 > [issue #28614](https://github.com/Azure/azure-cli/issues/28614)
 
+## Architecture Overview
+This diagram illustrates the deployment flow, starting from Azure authentication, progressing through Terraform actions, and in the creation of resources within the Azure infrastructure.
+
+<img width="920" alt="image" src="https://github.com/user-attachments/assets/0574cff2-7900-4efd-bd35-e82855f42ea2">
+
+> [!IMPORTANT]
+> The project is structured as described, but it may undergo changes in the future to adopt a more automated approach.
+
 ## 📝 Project Structure
 
 For this project, we will structure it into two parts:
@@ -106,17 +114,9 @@ storage-sync/
   - `variables.tf`: Contains global variables for project configuration.
   - `README.md`: Project documentation.
 
-## Diagram
-
-<img width="920" alt="image" src="https://github.com/user-attachments/assets/0574cff2-7900-4efd-bd35-e82855f42ea2">
-
-
 > [!NOTE]
 > 
 > The project is structured this way because we will need to manually intervene to install the agent on the server where the file server we want to synchronize is located. After this correct instalation and server registration, we will obtain the value for the `registered_server_id` variable, which will allow us to proceed with applying the `module-server-endpoint`.
-
-> [!IMPORTANT]
-> The project is structured as described, but it may undergo changes in the future to adopt a more automated approach.
 
 ## How to
 
