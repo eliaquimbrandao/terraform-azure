@@ -44,7 +44,20 @@ az role assignment create --assignee $appId --role "Reader and Data Access" --sc
 > 
 > [issue #28614](https://github.com/Azure/azure-cli/issues/28614)
 
-## Project Structure
+## 📝 Project Structure
+
+For this project, we will structure it into two parts:
+
+- Part 1: 
+  - Storage Account
+  - File share
+  - Storage Sync Service
+  - Cloud endpoint
+   
+- Part 2:
+  - Installation of the agent on server and server registration.
+    - [Install the Azure File Sync agent](https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-deployment-guide?tabs=azure-portal%2Cproactive-portal#install-the-azure-file-sync-agent)
+  - Configuration of the server endpoint within the Storage Sync Service.
 
 ```
 storage-sync/
@@ -97,20 +110,6 @@ storage-sync/
 
 <img width="920" alt="image" src="https://github.com/user-attachments/assets/0574cff2-7900-4efd-bd35-e82855f42ea2">
 
-## 📝 Project Structure
-
-For this project, we will structure it into two parts:
-
-- Part 1: 
-  - Storage Account
-  - File share
-  - Storage Sync Service
-  - Cloud endpoint
-   
-- Part 2:
-  - Installation of the agent on server and server registration.
-    - [Install the Azure File Sync agent](https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-deployment-guide?tabs=azure-portal%2Cproactive-portal#install-the-azure-file-sync-agent)
-  - Configuration of the server endpoint within the Storage Sync Service.
 
 > [!NOTE]
 > 
