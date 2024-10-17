@@ -23,7 +23,7 @@ This project automates the deployment of an Azure Storage Sync environment using
 
 
 ### Access 
-As mentioned before [terraform-azure](terraform-azure/README.md), after you have setup your environment and configured **Service Principal** credentials, ensure that it has the appropriate permissions for provisioning the required resources.
+As mentioned before [terraform-azure](../README.md), after you have setup your environment and configured **Service Principal** credentials, ensure that it has the appropriate permissions for provisioning the required resources.
 
   -  **Azure Service Principal:** `Contributor` access at subscription level. Consider a custom RBAC (Role-Based Access Control) for more restrictive access level if required.
 
