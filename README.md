@@ -51,7 +51,7 @@ By leveraging **Infrastructure as Code (IaC)** with Terraform, these examples en
    ```bash
    git clone https://github.com/eliaquimbrandao/terraform-azure.git
    ```
-
+   
 4. **Install Terraform**: If you haven't already, [install Terraform](https://learn.hashicorp.com/terraform/getting-started/install.html) on your machine.
 
 5. **Authenticate with Azure**:
@@ -63,11 +63,11 @@ Choose from the following authentication methods that aligns with your environme
 - **Azure Account Credentials**: For development and manual tasks. Use `az login` to authenticate. Not recommended for automation.
 
 For this scenario, we recommend using a **Service Principal** for authentication.
-   -  If you don’t have one set up yet, you can create a **Service Principal** by following these steps. [Service Principal](https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac):
+   -  If you don’t have one set up yet, you can create a **Service Principal** by following these steps. [Service Principal](https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac).
 
-     ```bash
+   ```bash
      az ad sp create-for-rbac --name "terraform-sp" --role="Contributor" --scopes="/subscriptions/<subscription-id>"
-     ```
+   ```
 
 4. **Explore and Experiment**: Now that you’re all set up, and ready to dive into the Terraform code. Enjoy exploring and building! 🎉
 
