@@ -67,6 +67,7 @@ For this project, we will structure it into two parts:
     - [Install the Azure File Sync agent](https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-deployment-guide?tabs=azure-portal%2Cproactive-portal#install-the-azure-file-sync-agent)
   - Configuration of the server endpoint within the Storage Sync Service.
 
+### Terraform files Structure
 ```
 storage-sync/
 ├── module-rg
