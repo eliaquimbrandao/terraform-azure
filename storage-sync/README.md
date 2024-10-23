@@ -9,6 +9,18 @@
 ![License](https://img.shields.io/badge/License-MIT-yellowgreen)
 ![Contributions](https://img.shields.io/badge/Contributions-Welcome-brightgreen)
 
+## In this article
+
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+  - [Access](#access)
+- [Architecture Overview](#architecture-overview)
+- [Project Structure](#project-structure)
+  - [Terraform Files Structure](#terraform-files-structure)
+- [How To](#how-to)
+  - [Part 1](#part-1)
+  - [Part 2](#part-2)
+
 ## Overview
 This project automates the deployment of an Azure Storage Sync environment using Terraform. It consists of modularized components for resource group creation, storage account and storage sync services and its components.
 
@@ -52,7 +64,7 @@ This diagram illustrates the deployment flow, starting from Azure authentication
 > [!IMPORTANT]
 > The project is structured as described, but it may undergo changes in the future to adopt a more automated approach.
 
-## 📝 Project Structure
+## Project Structure
 
 For this project, we will structure it into two parts:
 
@@ -121,7 +133,7 @@ storage-sync/
 
 ## How to
 
-### Part 1: 
+### Part 1
 
 In the first phase of this project, we begin with `terraform init`, followed by `terraform plan` to confirm that the configuration aligns with expectations. After verification, we run `terraform apply` to implement the changes. This phase targets the `rg, storage, and syncservice modules`, ensuring that core Azure infrastructure components are correctly set up and ready for the next stages.
 
@@ -151,5 +163,5 @@ terraform apply -target=module.rg -target=module.storage -target=module.syncserv
 >
 > This allows you to initialize Terraform without needing to change directories.
 
-### Part 2: 
+### Part 2
 
