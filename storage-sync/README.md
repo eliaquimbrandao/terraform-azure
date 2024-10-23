@@ -133,6 +133,15 @@ storage-sync/
 
 ## How to
 
+> [!TIP]
+> If you are not currently in the project folder, you can still initialize Terraform for the project by specifying the folder path directly. Use the following command:
+>
+> ```bash
+> terraform -chdir=path/to/your/project init
+> ```
+>
+> This allows you to initialize Terraform without needing to change directories.
+
 ### Part 1
 
 In the first phase of this project, we begin with `terraform init`, followed by `terraform plan` to confirm that the configuration aligns with expectations. After verification, we run `terraform apply` to implement the changes. This phase targets the `rg, storage, and syncservice modules`, ensuring that core Azure infrastructure components are correctly set up and ready for the next stages.
@@ -152,16 +161,6 @@ terraform apply -target=module.rg -target=module.storage -target=module.syncserv
 ```
 <img width="1170" alt="image" src="https://github.com/user-attachments/assets/2a5b4654-1f0c-41fb-9534-42613e8194a2">
 <img width="557" alt="image" src="https://github.com/user-attachments/assets/e08dc459-ca1e-4dd2-b9bb-af925d616988">
-
-
-> [!TIP]
-> If you are not currently in the project folder, you can still initialize Terraform for the project by specifying the folder path directly. Use the following command:
->
-> ```bash
-> terraform -chdir=path/to/your/project init
-> ```
->
-> This allows you to initialize Terraform without needing to change directories.
 
 ### Part 2
 
