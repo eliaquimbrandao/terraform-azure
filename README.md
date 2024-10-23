@@ -75,10 +75,9 @@ For this scenario, we recommend using a **Service Principal** for authentication
 
 Each example resides in its own directory with specific instructions:
 
-- **Networking**: [terraform-azure/networking](terraform-azure/networking) ⏳ Pending  
-- **Virtual Machine**: [terraform-azure/virtual-machine](terraform-azure/virtual-machine) ⏳ Pending  
 - **Storage Sync Services (Azure File Sync)**: [terraform-azure/storage-sync](https://github.com/eliaquimbrandao/terraform-azure/tree/main/storage-sync) ✅ Completed
-- **Storage Account**: [terraform-azure/storage-account](terraform-azure/storage-account) ⏳ Pending  
+
+⏳ Pending  
 
 *(More examples as they become available.)*
 
