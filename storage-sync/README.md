@@ -184,7 +184,7 @@ In the second phase, we focus on setting up the server endpoint components for S
 #### Part 2.2: Registering the Server and Collecting the Server ID
 
 1. **Register the Server:**
-   - In the **Azure File Sync Agent**, click on **Register Server**.
+   - In the **Azure File Sync Agent**, click on **[Register Server](https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-server-registration)**.
    - Sign in using your Azure credentials and choose the appropriate **Azure subscription** and **Resource Group** where your Azure Storage Sync Service is located.
    - Select your **Storage Sync Service** to complete the server registration.
 
