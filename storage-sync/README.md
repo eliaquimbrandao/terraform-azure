@@ -18,8 +18,8 @@
 - [Project Structure](#project-structure)
   - [Terraform Files Structure](#terraform-files-structure)
 - [How To](#how-to)
-  - [Part 1](#part-1)
-  - [Part 2](#part-2)
+  - [Part 1: Provisioning Core Azure Resources](#part-1-provisioning-core-azure-resources)
+  - [Part 2: Server Endpoint configuration](#part-2-server-endpoint-configuration)
     - [Part 2.1: Installing the Azure File Sync Agent](#part-21-installing-the-azure-file-sync-agent)
     - [Part 2.2: Registering the Server and Collecting the Server ID](#part-22-registering-the-server-and-collecting-the-server-id)
     - [Part 2.3: Applying the Server-Endpoint Module](#part-23-applying-the-server-endpoint-module)
@@ -145,7 +145,7 @@ storage-sync/
 >
 > This allows you to initialize Terraform without needing to change directories.
 
-### Part 1
+### Part 1: Provisioning Core Azure Resources
 
 In the first phase of this project, we begin with `terraform init`, followed by `terraform plan` to confirm that the configuration aligns with expectations. After verification, we run `terraform apply` to implement the changes. This phase targets the `rg, storage, and syncservice modules`, ensuring that core Azure infrastructure components are correctly set up and ready for the next stages.
 
@@ -165,9 +165,9 @@ terraform apply -target=module.rg -target=module.storage -target=module.syncserv
 <img width="1170" alt="image" src="https://github.com/user-attachments/assets/2a5b4654-1f0c-41fb-9534-42613e8194a2">
 <img width="557" alt="image" src="https://github.com/user-attachments/assets/e08dc459-ca1e-4dd2-b9bb-af925d616988">
 
-### Part 2
+### Part 2: Server Endpoint configuration
 
-In the second phase, we focus on setting up the server endpoint components for Storage Sync Service by installing the [Azure File Sync Agent](#), registering the server with the Azure Storage Sync Service, collecting the registered Server ID, and updating the `terraform.tfvars` file with the Server ID, ensuring the server is ready for file sync operations and fully integrated into the Azure infrastructure to `terraform apply` the `module-server-endpoint`.
+In the second phase, we focus on setting up the server endpoint components for Storage Sync Service by installing the [Azure File Sync Agent](#part-21-installing-the-azure-file-sync-agent), [registering](#part-22-registering-the-server-and-collecting-the-server-id) the server with the Azure Storage Sync Service, [collecting](#part-22-registering-the-server-and-collecting-the-server-id) the registered Server ID, and updating the `terraform.tfvars` file with the Server ID, ensuring the server is ready for file sync operations and fully integrated into the Azure infrastructure to [apply](#part-23-applying-the-server-endpoint-module) `terraform apply` the `module-server-endpoint`.
 
 #### Part 2.1: Installing the Azure File Sync Agent
 
