@@ -20,6 +20,9 @@
 - [How To](#how-to)
   - [Part 1](#part-1)
   - [Part 2](#part-2)
+    - [Part 2.1: Installing the Azure File Sync Agent](#part-21-installing-the-azure-file-sync-agent)
+    - [Part 2.2: Registering the Server and Collecting the Server ID](#part-22-registering-the-server-and-collecting-the-server-id)
+    - [Part 2.3: Applying the Server-Endpoint Module](#part-23-applying-the-server-endpoint-module)
 
 ## Overview
 This project automates the deployment of an Azure Storage Sync environment using Terraform. It consists of modularized components for resource group creation, storage account and storage sync services and its components.
@@ -80,7 +83,7 @@ For this project, we will structure it into two parts:
   - Configuration of the server endpoint within the Storage Sync Service.
 
 ### Terraform files Structure
-```
+```hcl
 storage-sync/
 ├── module-rg
 │   ├── rg.tf
@@ -136,7 +139,7 @@ storage-sync/
 > [!TIP]
 > If you are not currently in the project folder, you can still initialize Terraform for the project by specifying the folder path directly. Use the following command:
 >
-> ```bash
+> ```hcl
 > terraform -chdir=path/to/your/project init
 > ```
 >
@@ -146,17 +149,17 @@ storage-sync/
 
 In the first phase of this project, we begin with `terraform init`, followed by `terraform plan` to confirm that the configuration aligns with expectations. After verification, we run `terraform apply` to implement the changes. This phase targets the `rg, storage, and syncservice modules`, ensuring that core Azure infrastructure components are correctly set up and ready for the next stages.
 
-```terraform
+```hcl
 terraform init
 ```
 <img width="728" alt="image" src="https://github.com/user-attachments/assets/01ab33d1-1ee1-4a36-a1ab-68785389ca81">
 
-```terraform
+```hcl
 terraform plan -target=module.rg -target=module.storage -target=module.syncservice
 ```
 <img width="1168" alt="image" src="https://github.com/user-attachments/assets/36ab301a-4052-46f7-8a2c-c6d48e3d3d57">
 
-```terraform
+```hcl
 terraform apply -target=module.rg -target=module.storage -target=module.syncservice
 ```
 <img width="1170" alt="image" src="https://github.com/user-attachments/assets/2a5b4654-1f0c-41fb-9534-42613e8194a2">
@@ -164,3 +167,73 @@ terraform apply -target=module.rg -target=module.storage -target=module.syncserv
 
 ### Part 2
 
+In the second phase, we focus on setting up the server endpoint components for Storage Sync Service by installing the [Azure File Sync Agent](#), registering the server with the Azure Storage Sync Service, collecting the registered Server ID, and updating the `terraform.tfvars` file with the Server ID, ensuring the server is ready for file sync operations and fully integrated into the Azure infrastructure to `terraform apply` the `module-server-endpoint`.
+
+#### Part 2.1: Installing the Azure File Sync Agent
+
+1. **Download the Azure File Sync Agent:**
+   - Head over to the [Microsoft Azure Download Center](https://www.microsoft.com/en-us/download/details.aspx?id=57159).
+   - Download the latest version of the **Azure File Sync Agent** for your server's operating system.
+
+2. **Install the Sync Agent:**
+   - Run the installer on your server and follow the on-screen prompts to complete the installation.
+
+3. **Verify the Installation:**
+   - Once installed the **Azure File Sync Agent**, you will be automatically prompted to register the server. If the prompt does not appear, manually open the File Sync Agent and proceed with the server registration.
+  
+#### Part 2.2: Registering the Server and Collecting the Server ID
+
+1. **Register the Server:**
+   - In the **Azure File Sync Agent**, click on **Register Server**.
+   - Sign in using your Azure credentials and choose the appropriate **Azure subscription** and **Resource Group** where your Azure Storage Sync Service is located.
+   - Select your **Storage Sync Service** to complete the server registration.
+
+<img width="629" alt="image" src="https://github.com/user-attachments/assets/bdd1415b-cb58-4ade-901f-f9f64b2e69c4">
+
+This completes the installation of the Azure File Sync Agent and the server registration with the Storage Sync Service.
+
+<img width="1499" alt="image" src="https://github.com/user-attachments/assets/60ab8bc0-56f0-45e0-8f75-02c56cac691a">
+
+> [!TIP]
+> You can copy the Azure resource URL, which will already include the server ID; however, in the next step, we will collect it.
+>
+> <img width="624" alt="image" src="https://github.com/user-attachments/assets/58b8608e-4803-4362-9ccb-83c5c6b138a3">
+
+2. **Collect the Registered Server ID:**
+  - Use the following CLI command to collect the Registered Server ID from the Azure Storage Sync Service.
+    
+```bash
+az storagesync registered-server list --resource-group <rg-name> --storage-sync-service <storage-sync-name> --query "[].id" --output tsv
+```
+
+**Example Output**:
+
+```bash
+/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<rg-name>/providers/Microsoft.StorageSync/storageSyncServices/<storage-sync-name>/registeredServers/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+```
+
+3. **Update the `terraform.tfvars` File:**
+   - Open the `terraform.tfvars` file in your repository.
+   - Add the server's **ID** that you copied or collect earlier to the corresponding variable for the module-server-endpoint.
+
+```hcl
+registered_server_id = "<your-registered-server-id>"
+```
+
+#### Part 2.3: Applying the Server-Endpoint Module
+
+In this step, we will `plan` and `apply` the server-endpoint module to configure the server’s connection to Azure File Sync. This completes the process of setting up the server endpoint, linking your server to the Azure File Sync service for synchronization.
+
+```hcl
+terraform plan -target=module.server-endpoint
+
+terraform apply -target=module.server-endpoint
+```
+
+<img width="1185" alt="image" src="https://github.com/user-attachments/assets/0aeba9aa-a9f5-4e42-a064-813574ca7665">
+
+<img width="1179" alt="image" src="https://github.com/user-attachments/assets/06dfbcc1-0aae-4b75-b0c3-43739d3d568a">
+
+After applying the server endpoint module, verify your Sync Group to ensure the server endpoint is properly configured. The synchronization "Initial Sync" process will begin, and completion will depend on the volume of data being synchronized.
+
+<img width="1500" alt="image" src="https://github.com/user-attachments/assets/1b88e3b0-b21d-4aa7-a0d2-b9b5296d33af">
